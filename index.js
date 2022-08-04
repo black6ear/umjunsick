@@ -71,17 +71,27 @@ fs.readdirSync(path.resolve(__dirname, 'commands'))
 		}
 	});
 
+
+
+
+const { MyBot } = require("koreanbots")
+const Bot = new MyBot("eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjQ1MDE3NzEzNzg1Nzc4OTk3MiIsImlhdCI6MTYwNzc4Mzc4MywiZXhwIjoxNjM5MzQxMzgzfQ.fS4yjAyLJxDX5ajQI7wQavYI2cf6TYJ1czlvLoUrmu_rojnzt20bf7H14iHwN8k4GbYgmVghZylclesR0e4SuPakGxO7nkJvuozXVLtkALk4e1bhUopoO2u-hFVwjjdSkw4g4ZKPVj7u4IHbuxbHFLQ6bqwWQUISGmwa927zXWw")
+
+let update = count => Bot.update(count) 
+    .then(res => console.log("서버 수를 정상적으로 업데이트하였습니다!\n반환된 정보:" + JSON.stringify(res)))
+    .catch(console.error)
+
 bot.on('ready', () => {
 	console.log(`Logged in as ${bot.user.tag} (ID: ${bot.user.id})`);
-	bot.user.setStatus('available');
-	bot.user.setPresence({
-		game: {
-			name: '$도움 | 야동',
-			type: 'WATCHING',
-			url: ''
-		}
-	});
+	bot.user.setActivity(`$도움 | ${bot.guilds.cache.size}개의 서버`, {
+    type: "PLAYING",
+    url: "https://www.twitch.tv/wookwakgood"
+  });
+  update(bot.guilds.size) // 준비 상태를 시작할 때, 최초로 업데이트합니다.
+  setInterval(() => update(bot.guilds.cache.size), 600000) // 10분마다 서버 수를 업데이트합니다.
 });
+
+
 
 bot.on('message', msg => {
 	if (msg.content === '엄') {
