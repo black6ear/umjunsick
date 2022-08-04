@@ -90,7 +90,6 @@ bot.on('ready', () => {
     type: "PLAYING",
     url: "https://www.twitch.tv/wookwakgood"
   });
-  setInterval(() => update(bot.guilds.cache.size), 600000) // 10분마다 서버 수를 업데이트합니다.
 });
 
 
