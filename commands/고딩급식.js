@@ -1,5 +1,6 @@
 const fs = require('fs');
 const { MessageEmbed } = require("discord.js");
+require('discord-reply');
 
 exports.run = async (bot, msg, args) => {
 	const request = require('request');
@@ -10,14 +11,14 @@ exports.run = async (bot, msg, args) => {
 
 	request(iurl, async (err, res, body) => {
 		if (!args[0])
-			return msg.reply(
-				'$고딩급식 `학교이름` `날짜(일)` ex)$고딩급식 김해고 3'
+			return msg.lineReply(
+				'$급식 `학교이름` `날짜(일)` ex)$고딩급식 김해고 3'
 			);
     
 		var json = JSON.parse(body);
 
 		if (Object.keys(json['school_infos']).length === 0) {
-			return msg.reply('`' + args[0] + '` 학교를 찾을수 없음.')
+			return msg.lineReply('`' + args[0] + '` 학교를 찾을수 없음.')
       }
 
     var si = json['school_infos']
@@ -45,14 +46,14 @@ exports.run = async (bot, msg, args) => {
 
         		  request(url, (err, res, body) => {
         			  if (!args[1])
-        				  return msg.reply(
+        				  return msg.lineReply(
         					  '$고딩급식 `학교이름` `날짜(일)` ex)$고딩급식 김해고 3'
         			  	);
         
         			  var json = JSON.parse(body);
         
         			  if (Object.keys(json['menu']).length === 0)
-        				  return msg.reply('`' + name + '`의 급식이 없습니다.');
+        				  return msg.lineReply('`' + name + '`의 급식이 없습니다.');
         
         		  	//console.log(json['menu']['0']);
         			  var ml = json['menu']['0']['lunch'];
@@ -60,7 +61,7 @@ exports.run = async (bot, msg, args) => {
         	  		var foslist = new Array();
         
         		  	if (Object.keys(ml).length === 0)
-        			  	return msg.reply('`' + name + '`의 급식이 없습니다.');
+        			  	return msg.lineReply('`' + name + '`의 급식이 없습니다.');
         
         			  ml.forEach(function(element) {
         			  	var req = JSON.stringify(element);
@@ -76,7 +77,7 @@ exports.run = async (bot, msg, args) => {
                   {name: '급식', value: foslist.join('\n')},
                   {name: '학교주소', value: '`'+add+'`'},
                 )
-                .setFooter(msg.author.tag, msg.author.defaultAvatarURL)
+                .setFooter(msg.author.tag, msg.author.displayAvatarURL())
         
         		  	msg.channel.send(gs).catch(console.error);
         		  });
@@ -86,14 +87,14 @@ exports.run = async (bot, msg, args) => {
 
           		request(url, (err, res, body) => {
           			if (!args[1])
-          				return msg.reply(
+          				return msg.lineReply(
           					'$고딩급식 `학교이름` `날짜(일)` ex)$고딩급식 김해고 3'
           				);
           
           			var json = JSON.parse(body);
           
           			if (Object.keys(json['menu']).length === 0)
-          				return msg.reply('`' + name1 + '`의 급식이 없습니다.');
+          				return msg.lineReply('`' + name1 + '`의 급식이 없습니다.');
           
           			//console.log(json['menu']['0']);
           			var ml = json['menu']['0']['lunch'];
@@ -101,12 +102,12 @@ exports.run = async (bot, msg, args) => {
           			var foslist = new Array();
           
           			if (Object.keys(ml).length === 0)
-          				return msg.reply('`' + name1 + '`의 급식이 없습니다.');
+          				return msg.lineReply('`' + name1 + '`의 급식이 없습니다.');
           
           			ml.forEach(function(element) {
           				var req = JSON.stringify(element);
           				foslist.push(req.replace(/\"/gi, '`').replace(/[/.]/g, '').replace(/[0-9]/g,''));
-          			});
+          			}); 
           
                 const gs = new MessageEmbed()
                 .setTitle(`${Math.floor(d.getMonth() + 1)}월 ${args[1]}일 ${name1}의 점심 급식표`)
@@ -117,7 +118,7 @@ exports.run = async (bot, msg, args) => {
                   {name: '급식', value: foslist.join('\n')},
                   {name: '학교주소', value: '`'+add1+'`'},
                 )
-                .setFooter(msg.author.tag, msg.author.defaultAvatarURL)
+                .setFooter(msg.author.tag, msg.author.displayAvatarURL())
           
           			msg.channel.send(gs).catch(console.error);
           		});
@@ -140,14 +141,14 @@ exports.run = async (bot, msg, args) => {
 
 		request(url, (err, res, body) => {
 			if (!args[1])
-				return msg.reply(
+				return msg.lineReply(
 					'$고딩급식 `학교이름` `날짜(일)` ex)$고딩급식 김해고 3'
 				);
 
 			var json = JSON.parse(body);
 
 			if (Object.keys(json['menu']).length === 0)
-				return msg.reply('`' + name + '`의 급식이 없습니다.');
+				return msg.lineReply('`' + name + '`의 급식이 없습니다.');
 
 			//console.log(json['menu']['0']);
 			var ml = json['menu']['0']['lunch'];
@@ -155,7 +156,7 @@ exports.run = async (bot, msg, args) => {
 			var foslist = new Array();
 
 			if (Object.keys(ml).length === 0)
-				return msg.reply('`' + name + '`의 급식이 없습니다.');
+				return msg.lineReply('`' + name + '`의 급식이 없습니다.');
 
 			ml.forEach(function(element) {
 				var req = JSON.stringify(element);
@@ -171,13 +172,13 @@ exports.run = async (bot, msg, args) => {
         {name: '급식', value: foslist.join('\n')},
         {name: '학교주소', value: '`'+add+'`'},
       )
-      .setFooter(msg.author.tag, msg.author.defaultAvatarURL)
+      .setFooter(msg.author.tag, msg.author.displayAvatarURL())
 
-			msg.channel.send(gs).catch(console.error);
+			msg.channel.send(gs).catch(console.error);  
 		});
 	});
 };
 
 exports.help = {
-	name: '고딩급식'
+	name: '급식'
 };
