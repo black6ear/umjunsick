@@ -1,3 +1,20 @@
+const http = require('http');
+const express = require('express');
+const app = express();
+var server = require('http').createServer(app);
+app.get('/', (request, response) => {
+	console.log(Date.now() + ' Ping Received');
+	response.sendStatus(200);
+});
+const listener = server.listen(process.env.PORT, function() {
+	console.log('Your app is listening on port ' + listener.address().port);
+});
+setInterval(() => {
+	http.get(`http://${process.env.PROJECT_DOMAIN}.glitch.me/`);
+}, 280000);
+
+
+
 const path = require('path');
 const fs = require('fs');
 // Only import the Client class from Discord.js
@@ -27,14 +44,6 @@ const config = (() => {
 		process.exit(1);
 	}
 
-	// If there isn't a token, the bot won't start, but if there is then
-	// we want to make sure it's a valid bot token
-	if (json.token && !/^[a-zA-Z0-9_\.\-]{59}$/.test(json.token)) {
-		console.error(
-			'The token you entered is invalid! Please carefully re-enter the token and restart the bot.'
-		);
-		process.exit(1);
-	}
 
 	return json;
 })();
