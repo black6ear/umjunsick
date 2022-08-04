@@ -83,12 +83,6 @@ fs.readdirSync(path.resolve(__dirname, 'commands'))
 
 
 
-const { MyBot } = require("koreanbots")
-const Bot = new MyBot("eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjQ1MDE3NzEzNzg1Nzc4OTk3MiIsImlhdCI6MTYwNzc4Mzc4MywiZXhwIjoxNjM5MzQxMzgzfQ.fS4yjAyLJxDX5ajQI7wQavYI2cf6TYJ1czlvLoUrmu_rojnzt20bf7H14iHwN8k4GbYgmVghZylclesR0e4SuPakGxO7nkJvuozXVLtkALk4e1bhUopoO2u-hFVwjjdSkw4g4ZKPVj7u4IHbuxbHFLQ6bqwWQUISGmwa927zXWw")
-
-let update = count => Bot.update(count) 
-    .then(res => console.log("서버 수를 정상적으로 업데이트하였습니다!\n반환된 정보:" + JSON.stringify(res)))
-    .catch(console.error)
 
 bot.on('ready', () => {
 	console.log(`Logged in as ${bot.user.tag} (ID: ${bot.user.id})`);
