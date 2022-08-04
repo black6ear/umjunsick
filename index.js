@@ -101,13 +101,6 @@ bot.on('ready', () => {
 });
 
 
-
-bot.on('message', msg => {
-	if (msg.content === '엄') {
-		msg.channel.send('준\n식');
-	}
-});
-
 bot.on('message', message => {
 	if (message.author.bot || !message.guild) {
 		return;
