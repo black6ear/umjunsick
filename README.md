@@ -15,9 +15,6 @@ $link
 
 ![급식](https://user-images.githubusercontent.com/58897994/101783062-22556e00-3b3d-11eb-8c12-3b13cff9bb59.png)
 
-## 디스코드
-
-https://discord.gg/Rktu9DUtSD
 
 ## 문의
 
@@ -25,7 +22,7 @@ https://discord.gg/Rktu9DUtSD
 
 MAIL -> heukkom0317@gmail.com
 
-이 봇은 두 프로젝트의 도움으로 만들어졌습니다.
+이 봇은 두 오픈소스의 도움으로 만들어졌습니다.
 
 글리치 호스트를 써서 서버가 불안정하여 핑이튀거나 다운될 수도 있습니다.
 
